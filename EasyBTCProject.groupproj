@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{28DB9935-2828-4498-9B6F-9373E2B8806C}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="EasyBTCClient\EasyBTC.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="EasyBTCSrv\EasyBTCSrv.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="EasyBTC">
+        <MSBuild Projects="EasyBTCClient\EasyBTC.dproj"/>
+    </Target>
+    <Target Name="EasyBTC:Clean">
+        <MSBuild Projects="EasyBTCClient\EasyBTC.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="EasyBTC:Make">
+        <MSBuild Projects="EasyBTCClient\EasyBTC.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="EasyBTCSrv">
+        <MSBuild Projects="EasyBTCSrv\EasyBTCSrv.dproj"/>
+    </Target>
+    <Target Name="EasyBTCSrv:Clean">
+        <MSBuild Projects="EasyBTCSrv\EasyBTCSrv.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="EasyBTCSrv:Make">
+        <MSBuild Projects="EasyBTCSrv\EasyBTCSrv.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="EasyBTC;EasyBTCSrv"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="EasyBTC:Clean;EasyBTCSrv:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="EasyBTC:Make;EasyBTCSrv:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
